@@ -189,4 +189,47 @@ class Clan_model extends CI_Model
 
         $this->db->insert('presensi', $data);
     }
+
+    public function deleteBackup()
+    {
+        $id = $this->uri->segment(3);
+
+        $priode = $this->db->get_where('backup_priode', ['id' => $id])->row_array();
+
+        $this->db->where('date', $priode['date']);
+        $this->db->where('expire', $priode['expire']);
+        $this->db->delete('backup_presensi');
+
+        $this->db->delete('backup_priode', ['id' => $id]);
+    }
+
+    public function restoreBackup()
+    {
+        $id = $this->uri->segment(3);
+
+        $backupPriode = $this->db->get_where('backup_priode', ['id' => $id])->row_array();
+
+        $priode = $this->db->get_where('priode', ['date' => $backupPriode['date']])->num_rows();
+        if ($priode > 0) {
+            $this->db->delete('priode', ['date' => $backupPriode['date']]);
+            $this->db->delete('presensi', ['date' => $backupPriode['date']]);
+        }
+
+        $this->db->where('date', $backupPriode['date']);
+        $this->db->where('expire', $backupPriode['expire']);
+        $presensiBackup = $this->db->get('backup_presensi')->result_array();
+
+        foreach ($presensiBackup as $presensi) {
+            $data = [
+                'id_member' => $presensi['id_member'],
+                'date' => $presensi['date'],
+                'week_1' => $presensi['week_1'],
+                'week_2' => $presensi['week_2'],
+                'week_3' => $presensi['week_3'],
+                'week_4' => $presensi['week_4']
+            ];
+            $this->db->insert('presensi', $data);
+        }
+        $this->db->insert('priode', ['date' => $backupPriode['date']]);
+    }
 }

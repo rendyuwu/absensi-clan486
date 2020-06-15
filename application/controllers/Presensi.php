@@ -9,6 +9,7 @@ class Presensi extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('compro', true);
         $this->load->model('Clan_model', 'clan');
+        check_backup();
     }
 
     public function index()
@@ -89,7 +90,50 @@ class Presensi extends CI_Controller
 
     public function delete()
     {
-        $this->clan->delete('priode', $this->uri->segment(3));
+        $id = $this->uri->segment(3);
+        $priode = $this->db->get_where('priode', ['id' => $id])->row_array();
+        $date = $priode['date'];
+
+        if ($this->db->get_where('presensi', ['date' => $date])->next_row() < 1) {
+            $this->clan->delete('priode', $id);
+        } else {
+
+            $presensi = $this->db->get_where('presensi', ['date' => $date])->result_array();
+
+            $curentDate = time();
+
+            $year = date('Y', $curentDate);
+            $month = date('m', $curentDate);
+            $month++;
+            $day = date('d', $curentDate);
+            $hour = date('h', $curentDate);
+            $minute = date('i', $curentDate);
+            $second = date('s', $curentDate);
+
+            $expire = mktime($hour, $minute, $second, $month, $day, $year);
+
+            foreach ($presensi as $p) {
+                $data = [
+                    'id_member' => $p['id_member'],
+                    'date' => $date,
+                    'week_1' => $p['week_1'],
+                    'week_2' => $p['week_2'],
+                    'week_3' => $p['week_3'],
+                    'week_4' => $p['week_4'],
+                    'expire' => $expire
+                ];
+
+                $this->db->insert('backup_presensi', $data);
+            }
+
+            $this->db->insert('backup_priode', ['date' => $date, 'expire' => $expire]);
+
+
+            $this->clan->delete('priode', $id);
+
+            $this->db->delete('presensi', ['date' => $date]);
+        }
+
 
         $this->session->set_flashdata('title', 'Congratulation!');
         $this->session->set_flashdata('message', 'Priode deleted!');

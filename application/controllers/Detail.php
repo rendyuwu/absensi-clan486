@@ -9,6 +9,7 @@ class Detail extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('compro', true);
         $this->load->model("Clan_model", "clan");
+        check_backup();
     }
 
     public function presensi($year, $month, $week)
@@ -130,5 +131,32 @@ class Detail extends CI_Controller
             $this->session->set_flashdata('icon', 'success');
             redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
         }
+    }
+
+    public function backup($year, $month, $week)
+    {
+        $data['title'] = "Backup";
+        $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $month++;
+        $data['date'] = mktime(null, null, null, $month, null, $year);
+
+        $data['presensi'] = $this->db->get_where('backup_presensi', ['date' => $data['date']])->result_array();
+
+        if ($week == 1) {
+            $data['week'] = "Minggu Pertama";
+        } elseif ($week == 2) {
+            $data['week'] = "Minggu Kedua";
+        } elseif ($week == 3) {
+            $data['week'] = "Minggu Ketiga";
+        } elseif ($week == 4) {
+            $data['week'] = "Minggu Keempat";
+        }
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('detail/backup', $data);
+        $this->load->view('templates/footer');
     }
 }
