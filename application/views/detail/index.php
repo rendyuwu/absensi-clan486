@@ -72,7 +72,7 @@
                                             $this->db->where('date', $date);
                                             $this->db->where('id_member', $id_member);
                                             $dataPresensi = $this->db->get('presensi')->row_array();
-                                            $week = @$dataPresensi['week_' . $this->uri->segment(5)];
+                                            $week = $dataPresensi['week_' . $this->uri->segment(5)];
 
                                             $status = $this->db->get_where('status', ['id' => $status])->row_array();
                                             $status = $status['status'];
@@ -86,6 +86,11 @@
                                             $status = $status['status'];
                                         }
                                     ?>
+                                        <?php
+                                        echo "<br>";
+                                        var_dump($id_member);
+                                        echo "<br>";
+                                        ?>
                                         <tr>
                                             <td><?= $status; ?></td>
                                             <td><?= $nim; ?></td>

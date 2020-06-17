@@ -11,12 +11,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nim">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" value="<?= $member['nim']; ?>">
+                        <input required type="text" class="form-control" id="nim" name="nim" value="<?= $member['nim']; ?>">
                         <?= form_error('nim', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     <div class="form-group">
                         <label for="nama">Full Name</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $member['nama']; ?>">
+                        <input required type="text" class="form-control" id="nama" name="nama" value="<?= $member['nama']; ?>">
                         <?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     <div class="form-group">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label for="telp">No Telp</label>
-                        <input type="text" class="form-control" id="telp" name="telp" value="<?= $member['telp']; ?>">
+                        <input required type="text" class="form-control" id="telp" name="telp" value="<?= $member['telp']; ?>">
                         <?= form_error('telp', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     <div class="form-group">

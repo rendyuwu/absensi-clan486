@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label for="menu">Edit Menu</label>
                     <input type="hidden" name="id" value="<?= $this->uri->segment(3); ?>">
-                    <input type="text" class="form-control" name="menu" id="menu" value="<?= $menu['menu'] ?>">
+                    <input type="text" class="form-control" name="menu" id="menu" required value="<?= $menu['menu'] ?>">
                     <?= form_error('menu', '<small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="float-right">

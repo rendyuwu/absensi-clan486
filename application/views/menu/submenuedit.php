@@ -13,7 +13,7 @@
                 <input type="hidden" name="id" value=<?= $this->uri->segment(3) ?>>
                 <div class="form-group">
                     <label for="title">Submenu title</label>
-                    <input type="text" class="form-control" name="title" id="title" neme="title" value="<?= $subMenu['title']; ?>">
+                    <input required type="text" class="form-control" name="title" id="title" neme="title" value="<?= $subMenu['title']; ?>">
                     <?= form_error('title', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group">
@@ -30,12 +30,12 @@
                 </div>
                 <div class="form-group">
                     <label for="url">Submenu url</label>
-                    <input type="text" class="form-control" id="url" name="url" value="<?= $subMenu['url']; ?>">
+                    <input required type="text" class="form-control" id="url" name="url" value="<?= $subMenu['url']; ?>">
                     <?= form_error('url', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group">
                     <label for="icon">Submenu icon</label>
-                    <input type="text" class="form-control" id="icon" name="icon" value="<?= $subMenu['icon']; ?>">
+                    <input required type="text" class="form-control" id="icon" name="icon" value="<?= $subMenu['icon']; ?>">
                     <?= form_error('icon', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group">

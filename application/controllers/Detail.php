@@ -67,11 +67,11 @@ class Detail extends CI_Controller
 
         $lastPriode = $this->input->post('lastPriode', true);
         if ($lastPriode == 1) {
-            $result = $this->clan->addPresensi();
+            $result = ignore_user_abort($this->clan->addPresensi());
 
             if ($result == false) {
-                $this->session->set_flashdata('title', 'Failed update presensi!');
-                $this->session->set_flashdata('message', 'Field kosong only can checked all or not checked!');
+                $this->session->set_flashdata('title', 'Error!');
+                $this->session->set_flashdata('message', 'You update same data or check filed kosong!');
                 $this->session->set_flashdata('icon', 'error');
                 redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
             } else {
@@ -81,10 +81,10 @@ class Detail extends CI_Controller
                 redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
             }
         } elseif ($lastPriode == 3) {
-            $result = $this->clan->updatePresensi();
+            $result = ignore_user_abort($this->clan->updatePresensi());
             if ($result == false) {
-                $this->session->set_flashdata('title', 'Failed update presensi!');
-                $this->session->set_flashdata('message', 'Field kosong only can checked all or not checked!');
+                $this->session->set_flashdata('title', 'Error!');
+                $this->session->set_flashdata('message', 'You update same data or check filed kosong!');
                 $this->session->set_flashdata('icon', 'error');
                 redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
             } else {
@@ -94,10 +94,10 @@ class Detail extends CI_Controller
                 redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
             }
         } else {
-            $result = $this->clan->updatePresensi();
+            $result = ignore_user_abort($this->clan->updatePresensi());
             if ($result == false) {
-                $this->session->set_flashdata('title', 'Failed update presensi!');
-                $this->session->set_flashdata('message', 'Field kosong only can checked all or not checked!');
+                $this->session->set_flashdata('title', 'Error!');
+                $this->session->set_flashdata('message', 'You update same data or check filed kosong!');
                 $this->session->set_flashdata('icon', 'error');
                 redirect('detail/presensi/' . $year . "/" . $month . "/" . $week);
             } else {

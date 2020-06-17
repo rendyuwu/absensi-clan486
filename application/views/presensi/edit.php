@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="year">Edit Year</label>
-                    <input type="text" class="form-control" name="year" id="year" value="<?= date("Y", $priode['date']); ?>">
+                    <input required type="text" class="form-control" name="year" id="year" value="<?= date("Y", $priode['date']); ?>">
                     <?= form_error('year', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <div class="float-right">
