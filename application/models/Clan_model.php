@@ -78,9 +78,11 @@ class Clan_model extends CI_Model
                     'week_' . $week => $id_absen
                 ];
 
+                if ($id_member == NULL) {
+                    return 3;
+                }
                 $this->db->insert('presensi', $data);
             }
-            die;
             return true;
         } else {
             return false;

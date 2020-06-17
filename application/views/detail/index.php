@@ -86,11 +86,6 @@
                                             $status = $status['status'];
                                         }
                                     ?>
-                                        <?php
-                                        echo "<br>";
-                                        var_dump($id_member);
-                                        echo "<br>";
-                                        ?>
                                         <tr>
                                             <td><?= $status; ?></td>
                                             <td><?= $nim; ?></td>
