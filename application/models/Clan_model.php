@@ -232,4 +232,137 @@ class Clan_model extends CI_Model
         }
         $this->db->insert('priode', ['date' => $backupPriode['date']]);
     }
+
+    public function generateSuratActive()
+    {
+        $selectToPriode = $this->input->post('selectToPriode');
+        $selectFromPriode = $this->input->post('selectFromPriode');
+
+        if ($selectFromPriode >= $selectToPriode) {
+            $this->session->set_flashdata('title', 'Error!');
+            $this->session->set_flashdata('message', 'Please check field priode!');
+            $this->session->set_flashdata('icon', 'error');
+            redirect('active');
+        }
+
+        $this->db->where('date >=', $selectFromPriode);
+        $this->db->where('date <=', $selectToPriode);
+        $priode = $this->db->get('priode')->result_array();
+
+        $total = 0;
+        $max = 0;
+        foreach ($priode as $p) {
+            $presensi = $this->db->get_where('presensi', ['date' => $p['date']])->result_array();
+
+            foreach ($presensi as $pre) {
+                $id_member = $pre['id_member'];
+                $date = $pre['date'];
+                $numrows = $this->db->get_where('total_active', ['id_member' => $id_member, 'date' => $date])->num_rows();
+
+                if ($numrows < 1) {
+                    $total = 0;
+                    $max = 0;
+                }
+
+                if ($numrows < 1) {
+                    if ($pre['week_1'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_1'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_2'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_2'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_3'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_3'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_4'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_4'] != 0) {
+                        $max++;
+                    }
+
+                    $this->db->insert('total_active', ['id_member' => $id_member, 'total' => $total, 'max' => $max, 'date' => $date]);
+                } else {
+                    if ($pre['week_1'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_1'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_2'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_2'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_3'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_3'] != 0) {
+                        $max++;
+                    }
+                    if ($pre['week_4'] == 1) {
+                        $total++;
+                        $max++;
+                    } elseif ($pre['week_4'] != 0) {
+                        $max++;
+                    }
+
+                    $this->db->update('total_active', ['total' => $total, 'max' => $max], ['id_member' => $id_member]);
+                }
+            }
+        }
+
+        $total_active = $this->db->get('total_active')->result_array();
+
+        foreach ($total_active as $ta) {
+            $id_member = $ta['id_member'];
+
+            $numrows = $this->db->get_where('active', ['id_member' => $id_member])->num_rows();
+
+            if ($numrows < 1) {
+
+                $data = [
+                    'id_member' => $id_member,
+                    'from_date' => $selectFromPriode,
+                    'to_date' => $selectToPriode,
+                    'total' => $ta['total'],
+                    'max' => $ta['max'],
+                    'minimal' => 75,
+                ];
+
+                $this->db->insert('active', $data);
+            } else {
+                $active = $this->db->get_where('active', ['id_member' => $id_member])->row_array();
+
+                $max = $active['max'] + $ta['max'];
+                $total = $active['total'] + $ta['total'];
+
+                $presentase = floor($total / $max * 100);
+
+                if ($presentase >= $active['minimal']) {
+                    $active = true;
+                } else {
+                    $active = false;
+                }
+
+                $data = [
+                    'total' => $total,
+                    'max' => $max,
+                    'presentase' => $presentase,
+                    'active' => $active
+                ];
+                $this->db->update('active', $data, ['id_member' => $id_member]);
+            }
+        }
+    }
 }

@@ -8,7 +8,6 @@ class User extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db2 = $this->load->database('compro', true);
-        check_backup();
     }
 
     public function index()

@@ -7,7 +7,6 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        check_backup();
     }
 
     public function index()

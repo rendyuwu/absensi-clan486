@@ -27,25 +27,4 @@ class Admin extends CI_Controller
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');
     }
-
-    public function changeAccess()
-    {
-        $menu_id = htmlspecialchars($this->input->post('menuId', true));
-        $role_id = htmlspecialchars($this->input->post('roleId', true));
-
-        $data = [
-            'role_id' => $role_id,
-            'menu_id' => $menu_id
-        ];
-
-        $result = $this->db->get_where('user_access_menu', $data);
-
-        if ($result->num_rows() < 1) {
-            $this->db->insert('user_access_menu', $data);
-        } else {
-            $this->db->delete('user_access_menu', $data);
-        }
-
-        $this->session->set_flashdata('message_role_access', 'Access changed!');
-    }
 }

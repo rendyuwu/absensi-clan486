@@ -9,7 +9,6 @@ class Detail extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('compro', true);
         $this->load->model("Clan_model", "clan");
-        check_backup();
     }
 
     public function presensi($year, $month, $week)

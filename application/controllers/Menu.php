@@ -9,7 +9,6 @@ class Menu extends CI_Controller
         is_logged_in();
         $this->load->model('Menu_model', 'menu');
         $this->db2 = $this->load->database('compro', true);
-        check_backup();
     }
 
 
