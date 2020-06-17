@@ -78,9 +78,10 @@ class Clan_model extends CI_Model
                     'week_' . $week => $id_absen
                 ];
 
-                if ($id_member == NULL) {
-                    return 3;
+                if ($id_member == NULL or $id_absen == NULL) {
+                    return false;
                 }
+
                 $this->db->insert('presensi', $data);
             }
             return true;
@@ -121,10 +122,10 @@ class Clan_model extends CI_Model
         }
         if ($result == $kosong) {
             $validasi = true;
-        } elseif ($kosong == 0) {
+        } else if ($kosong == 0) {
             $validasi = true;
         } else {
-            return false;
+            $validasi = false;
         }
 
         if ($validasi == true) {
@@ -150,9 +151,10 @@ class Clan_model extends CI_Model
                             'week_' . $week => $id_absen
                         ];
 
-                        if ($id_member == NULL) {
+                        if ($id_member == NULL or $id_member == NULL) {
                             return false;
                         }
+
                         $this->db->insert('presensi', $data);
                     }
                 } else {
