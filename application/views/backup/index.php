@@ -56,7 +56,7 @@
                                             <td><?= $second; ?> second left</td>
                                         <?php endif; ?>
                                         <td>
-                                            <?php if ($user['role_id' != 3]) : ?>
+                                            <?php if ($user['role_id'] != 3) : ?>
                                                 <a href="<?= base_url('backup/restore/') . $b['id']; ?>" class="badge badge-success">Restore</a>
                                                 <a href="<?= base_url('backup/delete/') . $b['id']; ?>" class="badge badge-danger delete-button">Delete</a>
                                             <?php else : ?>
