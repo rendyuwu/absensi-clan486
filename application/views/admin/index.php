@@ -4,10 +4,18 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between">
         <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-        <?php if ($get_report == false) : ?>
-            <a href="" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#newReportModal"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <?php if ($user['role_id'] != 3) : ?>
+            <?php if ($get_report == false) : ?>
+                <a href="" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#newReportModal"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <?php else : ?>
+                <a href="admin/resetreport" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm delete-button"><i class="fas fa-download fa-sm text-white-50"></i> Reset Report</a>
+            <?php endif; ?>
         <?php else : ?>
-            <a href="admin/resetreport" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm delete-button"><i class="fas fa-download fa-sm text-white-50"></i> Reset Report</a>
+            <?php if ($get_report == false) : ?>
+                <a href="#" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <?php else : ?>
+                <a href="#" class="mb-3 d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Reset Report</a>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 

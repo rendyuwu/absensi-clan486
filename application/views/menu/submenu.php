@@ -13,8 +13,11 @@
                 </div>
             <?php endif; ?>
 
-
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+            <?php if ($user['role_id'] != 3) : ?>
+                <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Submenu</a>
+            <?php else : ?>
+                <a href="#" class="btn btn-secondary mb-3">Add New Submenu</a>
+            <?php endif; ?>
 
 
             <table class="table table-hover">
@@ -40,8 +43,13 @@
                             <td><?= $sm['icon'] ?></td>
                             <td><?= $sm['is_active'] ?></td>
                             <td>
-                                <a href="<?= base_url('menu/submenuedit/') . $sm['id']; ?>" class="badge badge-success">Edit</a>
-                                <a href="<?= base_url('menu/submenudelete/') . $sm['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                <?php if ($user['role_id'] != 3) : ?>
+                                    <a href="<?= base_url('menu/submenuedit/') . $sm['id']; ?>" class="badge badge-success">Edit</a>
+                                    <a href="<?= base_url('menu/submenudelete/') . $sm['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                <?php else : ?>
+                                    <a href="#" class="badge badge-secondary">Edit</a>
+                                    <a href="#" class="badge badge-secondary">Delete</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php $i++; ?>

@@ -57,6 +57,7 @@ class Member extends CI_Controller
     }
     public function delete()
     {
+        check_role();
         $id = $this->uri->segment(3);
         $this->clan->delete('member', $id);
 
@@ -68,6 +69,7 @@ class Member extends CI_Controller
 
     public function edit()
     {
+        check_role();
         $data['title'] = "Member Management";
         $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 

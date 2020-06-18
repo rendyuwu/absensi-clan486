@@ -7,10 +7,18 @@
     <div class="row">
         <div class="col-lg">
 
-            <?php if ($active == NULL) : ?>
-                <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newActiveModal">Generate Surat Aktif</a>
+            <?php if ($user['role_id'] != 3) : ?>
+                <?php if ($active == NULL) : ?>
+                    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newActiveModal">Generate Surat Aktif</a>
+                <?php else : ?>
+                    <a href="active/truncate" class="btn btn-danger mb-3 delete-button">Clear Data</a>
+                <?php endif; ?>
             <?php else : ?>
-                <a href="active/truncate" class="btn btn-danger mb-3 delete-button">Clear Data</a>
+                <?php if ($active == NULL) : ?>
+                    <a href="" class="btn btn-secondary mb-3">Generate Surat Aktif</a>
+                <?php else : ?>
+                    <a href="active/truncate" class="btn btn-secondary mb-3">Clear Data</a>
+                <?php endif; ?>
             <?php endif; ?>
 
             <!-- DataTales Example -->

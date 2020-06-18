@@ -9,9 +9,11 @@
 
             <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>') ?>
 
-
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
-
+            <?php if ($user['role_id'] != 3) : ?>
+                <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+            <?php else : ?>
+                <a href="#" class="btn btn-secondary mb-3">Add New Menu</a>
+            <?php endif; ?>
 
             <table class="table table-hover">
                 <thead>
@@ -28,8 +30,13 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu'] ?></td>
                             <td>
-                                <a href="<?= base_url('menu/edit/') . $m['id']; ?>" class="badge badge-success">Edit</a>
-                                <a href="<?= base_url('menu/delete/') . $m['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                <?php if ($user['role_id'] != 3) : ?>
+                                    <a href="<?= base_url('menu/edit/') . $m['id']; ?>" class="badge badge-success">Edit</a>
+                                    <a href="<?= base_url('menu/delete/') . $m['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                <?php else : ?>
+                                    <a href="#" class="badge badge-secondary">Edit</a>
+                                    <a href="#" class="badge badge-secondary">Delete</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php $i++; ?>

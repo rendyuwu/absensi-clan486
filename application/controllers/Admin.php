@@ -162,6 +162,7 @@ class Admin extends CI_Controller
 
     public function resetReport()
     {
+        check_role();
         $this->db->truncate('report');
 
         $this->session->set_flashdata('title', 'Congratulation!');

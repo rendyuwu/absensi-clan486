@@ -42,6 +42,7 @@ class Menu extends CI_Controller
 
     public function delete()
     {
+        check_role();
         $id = $this->uri->segment(3);
         $this->db->delete('user_menu', ['id' => $id]);
 
@@ -53,6 +54,7 @@ class Menu extends CI_Controller
 
     public function edit()
     {
+        check_role();
         $data['title'] = "Menu Managament";
         $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
@@ -120,6 +122,7 @@ class Menu extends CI_Controller
 
     public function submenudelete()
     {
+        check_role();
         $id = $this->uri->segment(3);
         $this->db->delete('user_sub_menu', ['id' => $id]);
 
@@ -131,6 +134,7 @@ class Menu extends CI_Controller
 
     public function submenuedit()
     {
+        check_role();
         $data['title'] = "Submenu Management";
         $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['menu'] = $this->db->get('user_menu')->result_array();

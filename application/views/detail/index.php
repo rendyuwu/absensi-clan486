@@ -5,8 +5,14 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title . " " . date("F Y", $date); ?></h1>
     <div class="row">
         <div class="col-lg">
-            <?php if ($lastPriode == 0) : ?>
-                <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMemberModal">Add Member</a>
+            <?php if ($user['role_id'] != 3) : ?>
+                <?php if ($lastPriode == 0) : ?>
+                    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMemberModal">Add Member</a>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ($lastPriode == 0) : ?>
+                    <a href="#" class="btn btn-secondary mb-3">Add Member</a>
+                <?php endif; ?>
             <?php endif; ?>
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -145,8 +151,14 @@
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-            <?php if ($presensi != NULL) : ?>
-                <button type="submit" class="btn btn-primary btn-block"><?= $button; ?></button>
+            <?php if ($user['role_id'] != 3) : ?>
+                <?php if ($presensi != NULL) : ?>
+                    <button type="submit" class="btn btn-primary btn-block"><?= $button; ?></button>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ($presensi != NULL) : ?>
+                    <button type="submit" disabled class="btn btn-primary btn-block"><?= $button; ?></button>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
         <div class="col-lg-1"></div>

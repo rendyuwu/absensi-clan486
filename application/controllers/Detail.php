@@ -61,6 +61,7 @@ class Detail extends CI_Controller
 
     public function update()
     {
+        check_role();
         $year = $this->input->post('year', true);
         $month = $this->input->post('month', true);
         $week = $this->input->post('week', true);
@@ -111,6 +112,7 @@ class Detail extends CI_Controller
 
     public function add()
     {
+        check_role();
         $year = $this->input->post('year', true);
         $month = $this->input->post('month', true);
         $week = $this->input->post('week', true);
@@ -134,6 +136,7 @@ class Detail extends CI_Controller
 
     public function backup($year, $month, $week)
     {
+        check_role();
         $data['title'] = "Backup";
         $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 

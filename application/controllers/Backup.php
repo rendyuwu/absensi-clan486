@@ -29,6 +29,7 @@ class Backup extends CI_Controller
 
     public function delete()
     {
+        check_role();
         $this->clan->deleteBackup();
 
         $this->session->set_flashdata('title', 'Congratulation!');
@@ -39,6 +40,7 @@ class Backup extends CI_Controller
 
     public function restore()
     {
+        check_role();
         $this->clan->restoreBackup();
 
         $this->clan->deleteBackup();

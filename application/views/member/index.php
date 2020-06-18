@@ -14,7 +14,12 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMemberModal">Add New Member</a>
+
+            <?php if ($user['role_id'] != 3) : ?>
+                <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMemberModal">Add New Member</a>
+            <?php else : ?>
+                <a href="#" class="btn btn-secondary mb-3">Add New Member</a>
+            <?php endif; ?>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -50,8 +55,13 @@
                                         <td><?= $prodi['prodi']; ?></td>
                                         <td><?= $m['telp']; ?></td>
                                         <td>
-                                            <a href="<?= base_url('member/edit/') . $m['id']; ?>" class="badge badge-success">Edit</a>
-                                            <a href="<?= base_url('member/delete/') . $m['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                            <?php if ($user['role_id'] != 3) : ?>
+                                                <a href="<?= base_url('member/edit/') . $m['id']; ?>" class="badge badge-success">Edit</a>
+                                                <a href="<?= base_url('member/delete/') . $m['id']; ?>" class="badge badge-danger delete-button">Delete</a>
+                                            <?php else : ?>
+                                                <a href="#" class="badge badge-secondary">Edit</a>
+                                                <a href="#" class="badge badge-secondary">Delete</a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

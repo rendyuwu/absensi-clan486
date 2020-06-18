@@ -54,6 +54,7 @@ class Presensi extends CI_Controller
 
     public function edit()
     {
+        check_role();
         $data['title'] = "Presensi Clan486";
         $data['user'] = $this->db2->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
@@ -89,6 +90,7 @@ class Presensi extends CI_Controller
 
     public function delete()
     {
+        check_role();
         $id = $this->uri->segment(3);
         $priode = $this->db->get_where('priode', ['id' => $id])->row_array();
         $date = $priode['date'];

@@ -31,7 +31,7 @@ class Active extends CI_Controller
 
     public function generate()
     {
-
+        check_role();
         $this->clan->generateSuratActive();
 
         $this->session->set_flashdata('title', 'Congratulation!');
@@ -42,6 +42,7 @@ class Active extends CI_Controller
 
     public function truncate()
     {
+        check_role();
         $this->db->truncate('active');
         $this->db->truncate('total_active');
 

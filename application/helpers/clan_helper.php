@@ -38,3 +38,17 @@ function check_backup()
         }
     }
 }
+
+function check_role()
+{
+    $clan = get_instance();
+    $clan->db2 = $clan->load->database('compro', true);
+
+    $email = $clan->session->userdata('email');
+
+    $user = $clan->db2->get_where('user', ['email' => $email])->row_array();
+
+    if ($user['role_id'] == 3) {
+        redirect('auth/blocked');
+    }
+}
