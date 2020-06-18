@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mariadb',
-	'username' => 'root',
-	'password' => 'root',
+	'hostname' => 'localhost',
+	'username' => 'compro',
+	'password' => '4LsuC5aRLcawrEci9iF9',
 	'database' => 'member',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -97,10 +97,10 @@ $db['default'] = array(
 
 $db['compro'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mariadb',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'clan486',
+	'hostname' => 'localhost',
+	'username' => 'compro',
+	'password' => 'sWiXocHa1r5cAvoVlz2w',
+	'database' => 'compro',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
