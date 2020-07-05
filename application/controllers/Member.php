@@ -62,7 +62,7 @@ class Member extends CI_Controller
         $this->clan->delete('member', $id);
 
         $this->session->set_flashdata('title', 'Congratulation!');
-        $this->session->set_flashdata('message', 'Submenu deleted!');
+        $this->session->set_flashdata('message', 'Member deleted!');
         $this->session->set_flashdata('icon', 'success');
         redirect('member');
     }
