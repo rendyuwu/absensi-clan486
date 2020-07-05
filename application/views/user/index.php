@@ -9,7 +9,7 @@
     <div class="card mb-3 col-lg-7">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="https://clan486.or.id/assets/img/profile/ . $user['image']; ?>" class="card-img">
+                <img src="https://clan486.or.id/assets/img/profile/ . <?= $user['image']; ?>" class="card-img">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
